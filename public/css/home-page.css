@@ -1,0 +1,13 @@
+#transaction-history-table{
+    border: 1px solid;
+}
+#transaction-history-table th{
+    font-weight: bold;
+    text-align: left;
+    width: 80px;
+    border: 1px solid;
+}
+#transaction-history-table td{
+    text-align: right;
+    border: 1px solid;
+}

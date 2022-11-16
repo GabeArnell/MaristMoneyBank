@@ -1,0 +1,43 @@
+/*
+    CSS for general background of the site
+
+*/
+
+body{
+    background-color: red;
+}
+
+
+.banner{
+    background-color: white;
+    width: 80%;
+    height: 150px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+h1{
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.red-text{
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.main{
+    background: beige;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 50px;
+
+}
+a{
+    text-decoration: none;
+}
