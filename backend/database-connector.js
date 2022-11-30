@@ -4,7 +4,7 @@ const easyConfig = require("../game-settings/easy.js")
 let connectionInfo = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : 'admin',
     database : 'bank_db'
   }
 module.exports.setup = ()=>{
