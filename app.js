@@ -6,6 +6,9 @@ const express = require('express')
 const app = express()
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+var cors = require('cors')
+
+app.use(cors())
 
 app.use(express.static(path.join(__dirname,'public')));
 app.listen(PORT,()=>{
@@ -30,7 +33,7 @@ app.post("/login",async (req,res)=>{
             return;
         }
     
-        let authenticationToken = btoa(credentials.username)
+        let authenticationToken = Buffer.from(credentials.username).toString('base64')
         
         res.send({
             status: "success",
@@ -46,8 +49,9 @@ app.post("/home-page-info",(req,res)=>{
     let token = req.body.logintoken;
     let username = req.body.username;
     username = username.toLowerCase();
-    if (atob(token) != username){
-        console.log(atob(token), username)
+    
+    if ((Buffer.from(token, 'base64').toString()) != username){
+        console.log(Buffer.from(token, 'base64').toString(), username)
         res.send({
             status: "failure",
             reason: "Invalid or Expired Token"
@@ -83,8 +87,8 @@ app.post("/admin-search",(req,res)=>{
 
     targetUser = targetUser.toLowerCase();
     username = username.toLowerCase();
-    if (atob(token) != username){
-        console.log(atob(token), username)
+    if (Buffer.from(token, 'base64').toString()!= username){
+        console.log(Buffer.from(token, 'base64').toString(), username)
         res.send({
             status: "failure",
             reason: "Invalid or Expired Token"
@@ -122,8 +126,8 @@ app.post("/new-transaction",(req,res)=>{
 
     targetUser = targetUser.toLowerCase();
     username = username.toLowerCase();
-    if (atob(token) != username){
-        console.log(atob(token), username)
+    if (Buffer.from(token, 'base64').toString() != username){
+        console.log(Buffer.from(token, 'base64').toString(), username)
         res.send({
             status: "failure",
             reason: "Invalid or Expired Token"
@@ -149,4 +153,15 @@ app.post("/new-transaction",(req,res)=>{
     
     }
 })
+
+app.post("/full-game-reset",(req,res)=>{
+    console.log("Got reset request!")
+    console.log("-".repeat(20))
+    dbcModule.setup();
+
+    res.send({
+        status: "success"
+    });
+})
+
 
